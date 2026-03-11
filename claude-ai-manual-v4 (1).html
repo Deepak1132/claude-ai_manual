@@ -1,0 +1,2948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your First Claude AI Manual — Deepak Singh</title>
+<style>
+
+/* =====================================================
+   DESIGN SYSTEM
+   Style: Clean documentation — Notion / Stripe / Apple
+   Theme: Light · Warm white · Single blue accent
+   Fonts: Georgia serif body · Helvetica Neue UI labels
+===================================================== */
+
+:root {
+  --page:       #f8f8f6;
+  --white:      #ffffff;
+  --surf:       #f2f1ee;
+  --surf2:      #eae9e5;
+  --bdr:        #e0deda;
+  --bdr2:       #c8c6be;
+
+  --ink:        #1c1c1e;
+  --ink2:       #3a3a3c;
+  --ink3:       #6c6c70;
+  --ink4:       #aeaeb2;
+
+  --blue:       #1d4ed8;
+  --blue-l:     #dbeafe;
+  --blue-m:     #93c5fd;
+
+  --green:      #15803d;
+  --green-l:    #dcfce7;
+  --green-m:    #86efac;
+
+  --amber:      #b45309;
+  --amber-l:    #fef3c7;
+  --amber-m:    #fcd34d;
+
+  --red:        #b91c1c;
+  --red-l:      #fee2e2;
+
+  --purple:     #6d28d9;
+  --purple-l:   #ede9fe;
+  --purple-m:   #c4b5fd;
+
+  --fd:   Georgia, 'Times New Roman', serif;
+  --fu:   'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --fm:   'Courier New', Courier, monospace;
+
+  --r:    8px;
+  --r2:   4px;
+  --sh:   0 1px 4px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+  --shm:  0 4px 20px rgba(0,0,0,.08);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--fd);
+  font-size: 17px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== LAYOUT ===== */
+.w { max-width: 740px; margin: 0 auto; padding: 0 28px; }
+
+section { padding: 72px 0; border-bottom: 1px solid var(--bdr); }
+
+/* =====================================================
+   COVER
+===================================================== */
+.cover {
+  background: var(--white);
+  border-bottom: 2px solid var(--bdr);
+  padding: 84px 28px 76px;
+  text-align: center;
+}
+
+.cover-inner { max-width: 600px; margin: 0 auto; }
+
+.cover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-l);
+  border: 1px solid var(--blue-m);
+  border-radius: 20px;
+  padding: 6px 16px;
+  margin-bottom: 34px;
+}
+
+.cover h1 {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -.4px;
+  margin-bottom: 16px;
+}
+
+.cover-sub {
+  font-family: var(--fd);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink3);
+  margin-bottom: 36px;
+  line-height: 1.55;
+}
+
+.cover-rule {
+  width: 48px; height: 3px;
+  background: var(--blue);
+  border-radius: 2px;
+  margin: 0 auto 32px;
+}
+
+.cover-pills {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 0;
+}
+
+.cpill {
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--ink3);
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+/* =====================================================
+   AUTHOR PAGE
+===================================================== */
+.author-block {
+  background: var(--white);
+  border-bottom: 1px solid var(--bdr);
+  padding: 64px 28px;
+}
+
+.author-inner {
+  max-width: 540px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.author-mono {
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-l) 0%, var(--surf2) 100%);
+  border: 2px solid var(--bdr);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fd);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin: 0 auto 20px;
+  letter-spacing: -1px;
+}
+
+.eyebrow {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.author-name {
+  font-family: var(--fd);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.author-role {
+  font-family: var(--fu);
+  font-size: 14px;
+  color: var(--ink3);
+  margin-bottom: 2px;
+}
+
+.author-org {
+  font-family: var(--fu);
+  font-size: 12.5px;
+  color: var(--ink4);
+  margin-bottom: 22px;
+}
+
+.author-bio {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.72;
+  margin-bottom: 24px;
+}
+
+.li-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-l);
+  border: 1px solid var(--blue-m);
+  border-radius: var(--r);
+  padding: 9px 20px;
+  text-decoration: none;
+  transition: background .12s;
+}
+
+.li-btn:hover { background: #bfdbfe; }
+
+.li-ico {
+  width: 16px; height: 16px;
+  background: var(--blue);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  color: white;
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   TABLE OF CONTENTS
+===================================================== */
+.toc-wrap {
+  background: var(--white);
+  border-bottom: 1px solid var(--bdr);
+  padding: 64px 28px;
+}
+
+.toc-title {
+  font-family: var(--fd);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 26px;
+}
+
+nav ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  counter-reset: toc;
+}
+
+nav ol li { counter-increment: toc; }
+nav ol li::before { display: none !important; }
+
+nav ol li a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 16px;
+  border-radius: var(--r);
+  text-decoration: none;
+  color: var(--ink2);
+  font-family: var(--fu);
+  font-size: 14px;
+  border: 1px solid transparent;
+  transition: all .12s;
+}
+
+.tnum {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--ink4);
+  min-width: 28px;
+  flex-shrink: 0;
+}
+
+nav ol li a:hover {
+  background: var(--blue-l);
+  border-color: var(--blue-m);
+  color: var(--blue);
+}
+
+nav ol li a:hover .tnum { color: var(--blue); }
+
+/* =====================================================
+   CHAPTER ANATOMY
+===================================================== */
+
+/* ── Chapter header ── */
+.ch-hd {
+  margin-bottom: 44px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--bdr);
+}
+
+.ch-tag {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.ch-title {
+  font-family: var(--fd);
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.18;
+  letter-spacing: -.25px;
+  margin-bottom: 14px;
+}
+
+.ch-intro {
+  font-size: 1.02rem;
+  color: var(--ink3);
+  line-height: 1.72;
+  border-left: 3px solid var(--bdr2);
+  padding-left: 18px;
+}
+
+/* ── Section label ── */
+.sec-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* ── Headings ── */
+h2 {
+  font-family: var(--fd);
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 50px 0 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--bdr);
+  line-height: 1.28;
+}
+
+h3 {
+  font-family: var(--fd);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 30px 0 10px;
+  line-height: 1.3;
+}
+
+p { margin-bottom: 18px; }
+
+strong { color: var(--ink); font-weight: 700; }
+
+/* ── Lists ── */
+ul, ol.cl {
+  list-style: none;
+  margin: 10px 0 20px;
+  padding: 0;
+}
+
+ul li {
+  padding: 4px 0 4px 20px;
+  position: relative;
+  color: var(--ink2);
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+ul li::before {
+  content: '–';
+  position: absolute;
+  left: 4px;
+  color: var(--ink4);
+}
+
+ol.cl { counter-reset: cl; }
+ol.cl li { counter-increment: cl; padding: 4px 0 4px 24px; position: relative; font-size: 15.5px; color: var(--ink2); }
+ol.cl li::before {
+  content: counter(cl) '.';
+  position: absolute; left: 0;
+  font-family: var(--fu);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  top: 8px;
+}
+
+/* =====================================================
+   CHAPTER SECTION BLOCKS
+===================================================== */
+
+/* ── 1. Chapter Introduction → ch-intro (in header above) ── */
+
+/* ── 2. Learning Objectives ── */
+.objectives {
+  background: var(--blue-l);
+  border: 1px solid var(--blue-m);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin: 28px 0 38px;
+}
+
+.obj-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.objectives ul { margin: 0; }
+
+.objectives li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 3px 0;
+  color: var(--ink2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.objectives li::before {
+  content: '✓';
+  color: var(--blue);
+  font-weight: 700;
+  position: static;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── 3. Core Concept section label ── use h2 ── */
+
+/* ── 4. Visual Explanation ── */
+.visual-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 6px;
+  margin-top: 36px;
+  display: block;
+}
+
+/* ── 5. Example block ── */
+.example-block {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 22px 26px;
+  margin: 24px 0;
+  box-shadow: var(--sh);
+}
+
+.eg-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.example-block h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.example-block p  { font-size: 14.5px; color: var(--ink2); margin: 0; line-height: 1.65; }
+
+/* ── 6. Prompt Example block ── */
+.prompt-wrap {
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin: 24px 0;
+  box-shadow: var(--shm);
+}
+
+.pw-head {
+  background: #18181b;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pw-dots { display: flex; gap: 5px; }
+.pw-dot  { width: 10px; height: 10px; border-radius: 50%; }
+.pw-dot.r { background: #ff5f57; }
+.pw-dot.y { background: #febc2e; }
+.pw-dot.g { background: #28c840; }
+
+.pw-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.pw-prompt {
+  background: #1e1e1e;
+  padding: 20px 22px;
+  font-family: var(--fm);
+  font-size: 13.5px;
+  color: #d4d4d4;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.pw-exp {
+  background: var(--surf);
+  border-top: 1px solid var(--bdr);
+  padding: 18px 22px;
+}
+
+.pw-exp-hd {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.pw-what {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink2);
+  font-family: var(--fu);
+  margin-bottom: 6px;
+}
+
+.pw-exp p  { font-size: 13.5px; color: var(--ink2); margin: 0 0 8px; line-height: 1.6; }
+.pw-exp ul { margin: 6px 0 0; }
+.pw-exp li { font-size: 13.5px; color: var(--ink2); }
+
+/* ── 7. Key Takeaways ── */
+.takeaways {
+  background: var(--green-l);
+  border: 1px solid var(--green-m);
+  border-left: 4px solid var(--green);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin: 40px 0 20px;
+}
+
+.tk-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tk-ico {
+  width: 24px; height: 24px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 11px;
+  flex-shrink: 0;
+}
+
+.tk-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.takeaways ul { margin: 0; }
+
+.takeaways li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+
+.takeaways li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  position: static;
+  flex-shrink: 0;
+}
+
+/* ── 8. Learning Checkpoint ── */
+.checkpoint {
+  background: var(--purple-l);
+  border: 1px solid var(--purple-m);
+  border-left: 4px solid var(--purple);
+  border-radius: var(--r);
+  padding: 20px 24px;
+}
+
+.ck-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.ckq {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-top: 1px solid var(--purple-m);
+  font-size: 14.5px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+
+.ckn {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--purple);
+  background: #ddd6fe;
+  padding: 2px 7px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* =====================================================
+   SHARED COMPONENTS
+===================================================== */
+
+/* Video */
+.vid {
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin: 28px 0;
+  box-shadow: var(--shm);
+}
+
+.vid-bar {
+  background: var(--surf);
+  padding: 9px 16px;
+  font-family: var(--fu);
+  font-size: 12px;
+  color: var(--ink3);
+  border-bottom: 1px solid var(--bdr);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vd { width: 8px; height: 8px; border-radius: 50%; }
+.vd.r { background: #ef4444; }
+.vd.y { background: #f59e0b; }
+.vd.g { background: #22c55e; }
+
+.vid iframe { display: block; width: 100%; height: 370px; border: none; }
+
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  margin: 18px 0;
+  box-shadow: var(--sh);
+}
+
+.card.blue   { border-left: 4px solid var(--blue);   background: var(--blue-l);   }
+.card.green  { border-left: 4px solid var(--green);  background: var(--green-l);  }
+.card.amber  { border-left: 4px solid var(--amber);  background: var(--amber-l);  }
+.card.red    { border-left: 4px solid var(--red);    background: var(--red-l);    }
+.card.purple { border-left: 4px solid var(--purple); background: var(--purple-l); }
+
+.c-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.card.blue   .c-lbl { color: var(--blue);   }
+.card.green  .c-lbl { color: var(--green);  }
+.card.amber  .c-lbl { color: var(--amber);  }
+.card.red    .c-lbl { color: var(--red);    }
+.card.purple .c-lbl { color: var(--purple); }
+
+.card h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; font-family: var(--fd); }
+.card p, .card li { font-size: 14px; color: var(--ink2); line-height: 1.62; }
+
+/* Tables */
+.tbl { overflow-x: auto; margin: 20px 0; border-radius: var(--r); border: 1px solid var(--bdr); box-shadow: var(--sh); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: var(--white); }
+
+th {
+  background: var(--surf);
+  padding: 10px 15px;
+  text-align: left;
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  border-bottom: 1px solid var(--bdr);
+  white-space: nowrap;
+}
+
+td {
+  padding: 11px 15px;
+  border-bottom: 1px solid var(--bdr);
+  color: var(--ink2);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surf); }
+td:first-child { color: var(--ink); font-weight: 600; font-size: 13px; }
+
+/* Tip */
+.tip {
+  background: var(--amber-l);
+  border: 1px solid var(--amber-m);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--r);
+  padding: 13px 18px;
+  margin: 16px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.tip-i { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+.tip p  { font-size: 13.5px; color: var(--ink2); margin: 0; line-height: 1.6; }
+.tip strong { color: var(--amber); }
+
+/* Two-col */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+.two .card { margin: 0; }
+.two .card.bt-blue   { border-top: 3px solid var(--blue);   border-left: none; background: var(--white); }
+.two .card.bt-green  { border-top: 3px solid var(--green);  border-left: none; background: var(--white); }
+.two .card.bt-amber  { border-top: 3px solid var(--amber);  border-left: none; background: var(--white); }
+.two .card.bt-purple { border-top: 3px solid var(--purple); border-left: none; background: var(--white); }
+
+.two .card h4 { font-family: var(--fu); font-size: 13.5px; }
+.two .card.bt-blue   h4 { color: var(--blue);   }
+.two .card.bt-green  h4 { color: var(--green);  }
+.two .card.bt-amber  h4 { color: var(--amber);  }
+.two .card.bt-purple h4 { color: var(--purple); }
+
+.col-tag { font-family: var(--fu); font-size: 11px; color: var(--ink4); margin-bottom: 10px; display: block; }
+
+/* Cap grid */
+.cap { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 12px; margin: 18px 0; }
+
+.cap-t {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 18px;
+  box-shadow: var(--sh);
+}
+
+.cap-t .ico { font-size: 22px; margin-bottom: 8px; display: block; }
+.cap-t h4   { font-family: var(--fu); font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.cap-t p    { font-size: 12.5px; color: var(--ink3); margin: 0; line-height: 1.5; }
+
+/* Flow diagram */
+.flow { display: flex; flex-direction: column; margin: 18px 0; }
+
+.fs { display: flex; align-items: stretch; }
+
+.fspine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.fnode {
+  width: 11px; height: 11px;
+  border: 2px solid var(--blue);
+  background: var(--white);
+  border-radius: 50%;
+  margin-top: 19px;
+  flex-shrink: 0;
+}
+
+.fline {
+  width: 2px; flex: 1;
+  background: linear-gradient(180deg, var(--blue-m), var(--bdr));
+  margin: 4px 0;
+}
+
+.fs:last-child .fline { display: none; }
+
+.fcrd {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  box-shadow: var(--sh);
+}
+
+.ftag {
+  font-family: var(--fu);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 3px;
+  display: block;
+}
+
+.fcrd h4 { font-family: var(--fd); font-size: 14px; color: var(--ink); margin-bottom: 4px; font-weight: 700; }
+.fcrd p  { font-size: 12.5px; color: var(--ink3); margin: 0; line-height: 1.55; }
+
+/* Workflow diagram (prompt flow) */
+.pflow {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 24px;
+  margin: 18px 0;
+  box-shadow: var(--sh);
+  text-align: center;
+}
+
+.pflow-title {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.pflow-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.pstep {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r2);
+  padding: 10px 28px;
+  font-family: var(--fu);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink2);
+  width: 240px;
+}
+
+.pstep.highlight {
+  background: var(--blue-l);
+  border-color: var(--blue-m);
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.parrow {
+  font-size: 18px;
+  color: var(--ink4);
+  line-height: 1.4;
+  margin: 2px 0;
+}
+
+/* Arch */
+.arch {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 24px;
+  margin: 18px 0;
+  text-align: center;
+  box-shadow: var(--sh);
+}
+
+.arch-hub {
+  display: inline-block;
+  background: var(--ink);
+  color: white;
+  font-family: var(--fu);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 22px;
+  border-radius: 18px;
+  letter-spacing: .5px;
+  margin-bottom: 16px;
+}
+
+.arch-nodes { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; }
+
+.arch-n {
+  background: var(--surf);
+  border: 1px solid var(--bdr);
+  border-radius: 15px;
+  padding: 5px 13px;
+  font-family: var(--fu);
+  font-size: 11.5px;
+  color: var(--ink2);
+}
+
+/* Template slot */
+.tpl { background: var(--white); border: 1px solid var(--bdr); border-radius: var(--r); overflow: hidden; margin: 16px 0; box-shadow: var(--sh); }
+
+.tpl-hd {
+  background: var(--surf);
+  padding: 8px 16px;
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  border-bottom: 1px solid var(--bdr);
+}
+
+.tpl-body {
+  padding: 16px 20px;
+  font-family: var(--fm);
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.85;
+}
+
+.slot { color: var(--amber); background: var(--amber-l); padding: 0 4px; border-radius: 2px; font-style: italic; }
+
+/* Cheat grid */
+.cheat { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+
+.cheat-t {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 15px;
+  box-shadow: var(--sh);
+}
+
+.cheat-lbl {
+  font-family: var(--fu);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cheat-t ul { margin: 0; }
+.cheat-t li { font-size: 12.5px; color: var(--ink2); }
+
+/* HR */
+.hr { height: 1px; background: var(--bdr); margin: 48px 0; }
+
+/* Perm table */
+.perm { border: 1px solid var(--bdr); border-radius: var(--r); overflow: hidden; margin: 18px 0; box-shadow: var(--sh); }
+
+.pr { display: flex; border-bottom: 1px solid var(--bdr); }
+.pr:last-child { border-bottom: none; }
+.pr.hd { background: var(--surf); }
+.pc { flex: 1; padding: 11px 15px; font-size: 13.5px; color: var(--ink2); border-right: 1px solid var(--bdr); }
+.pc:last-child { border-right: none; }
+.pr.hd .pc { font-family: var(--fu); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); }
+.pc strong { color: var(--ink); }
+
+/* =====================================================
+   FOOTER
+===================================================== */
+footer {
+  background: var(--white);
+  border-top: 2px solid var(--bdr);
+  padding: 52px 28px;
+  text-align: center;
+}
+
+.ft-title { font-family: var(--fd); font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+footer p  { font-family: var(--fu); font-size: 12.5px; color: var(--ink4); margin: 3px 0; }
+
+.ft-author { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--bdr); }
+.ft-author p { color: var(--ink3); }
+.ft-author a { color: var(--blue); text-decoration: none; }
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (max-width: 560px) {
+  .w { padding: 0 16px; }
+  .two  { grid-template-columns: 1fr; }
+  .cheat { grid-template-columns: 1fr; }
+  .cap  { grid-template-columns: 1fr 1fr; }
+  section { padding: 48px 0; }
+  .vid iframe { height: 210px; }
+  .pw-prompt { font-size: 12px; }
+  table { font-size: 12.5px; }
+  td, th { padding: 9px 11px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===================================================
+     COVER
+=================================================== -->
+<header class="cover" id="top">
+  <div class="cover-inner">
+    <span class="cover-badge">📘 Complete Learning Guide</span>
+    <h1>Your First Claude AI Manual</h1>
+    <p class="cover-sub">Prompt Engineering and AI Workflows Explained Simply</p>
+    <div class="cover-rule"></div>
+    <div class="cover-pills">
+      <span class="cpill">📖 10 Chapters</span>
+      <span class="cpill">⏱ ~2 Hours</span>
+      <span class="cpill">✏️ 30+ Prompts</span>
+      <span class="cpill">🎬 6 Videos</span>
+      <span class="cpill">Based on Anthropic Claude 101</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===================================================
+     AUTHOR
+=================================================== -->
+<div class="author-block" id="author">
+  <div class="author-inner">
+    <div class="author-mono">DS</div>
+    <span class="eyebrow">About the Author</span>
+    <p class="author-name">Deepak Singh</p>
+    <p class="author-role">Product Manager</p>
+    <p class="author-org">Steering Committee Member — South Asian Success</p>
+    <p class="author-bio">
+      Deepak Singh is a Product Manager with a background in enterprise technology and AI product development. He leads product initiatives at South Asian Success — a Chicago-based professional community platform — where he applies AI tools to real-world product and workflow challenges. This manual distills his hands-on learning from Anthropic's Claude 101 course into a practical, prompt-first guide for professionals who want to use Claude effectively from day one.
+    </p>
+    <a class="li-btn" href="https://www.linkedin.com/in/deepak-bhandari-4a2095153/" target="_blank" rel="noopener">
+      <span class="li-ico">in</span>
+      Connect on LinkedIn
+    </a>
+  </div>
+</div>
+
+<!-- ===================================================
+     TABLE OF CONTENTS
+=================================================== -->
+<div class="toc-wrap" id="toc">
+  <div class="w">
+    <span class="eyebrow">Contents</span>
+    <p class="toc-title">Table of Contents</p>
+    <nav>
+      <ol>
+        <li><a href="#ch1"><span class="tnum">01</span>What is Claude</a></li>
+        <li><a href="#ch2"><span class="tnum">02</span>Claude Capabilities</a></li>
+        <li><a href="#ch3"><span class="tnum">03</span>Writing Effective Prompts</a></li>
+        <li><a href="#ch4"><span class="tnum">04</span>Claude Desktop Modes</a></li>
+        <li><a href="#ch5"><span class="tnum">05</span>Projects</a></li>
+        <li><a href="#ch6"><span class="tnum">06</span>Skills</a></li>
+        <li><a href="#ch7"><span class="tnum">07</span>Connectors</a></li>
+        <li><a href="#ch8"><span class="tnum">08</span>Enterprise Search</a></li>
+        <li><a href="#ch9"><span class="tnum">09</span>Research Mode</a></li>
+        <li><a href="#ch10"><span class="tnum">10</span>Practical Claude Workflows &amp; Prompt Playbook</a></li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- ===================================================
+     CHAPTER 1 — WHAT IS CLAUDE
+=================================================== -->
+<section id="ch1">
+<div class="w">
+
+  <!-- Chapter Introduction -->
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 01 · What is Claude</span>
+    <h1 class="ch-title">What is Claude?</h1>
+    <p class="ch-intro">You have probably heard of AI chatbots. Claude is different. It is not built to answer frequently asked questions or route support tickets. It is built to think alongside you — to reason through hard problems, write with clarity, research across documents, and collaborate on complex professional work. This chapter explains exactly what Claude is, how it is designed, and why that design matters.</p>
+  </div>
+
+  <!-- Learning Objectives -->
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain what Claude is and the principles guiding its design</li>
+      <li>Describe how Constitutional AI makes Claude different from other tools</li>
+      <li>Identify the different ways to access Claude</li>
+    </ul>
+  </div>
+
+  <!-- Video -->
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — Turning Claude into your thinking partner
+    </div>
+    <iframe src="https://www.youtube.com/embed/VHsp6Hp7Stw" allowfullscreen title="Turning Claude into your thinking partner"></iframe>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — What Makes Claude Different</h2>
+
+  <p>Claude is created by Anthropic, an AI safety company. What sets Claude apart is the framework behind every response: <strong>Constitutional AI</strong>. This is a training method that teaches Claude to align with human values — to be genuinely helpful, to avoid causing harm, and to be honest even when the truth is less convenient than a confident-sounding answer.</p>
+
+  <p>Early users consistently report that Claude is more steerable — you can direct its tone, style, and focus — and less likely to produce harmful or misleading outputs. That reliability is the foundation that makes Claude useful for serious professional work.</p>
+
+  <!-- Visual Explanation -->
+  <span class="visual-lbl">Visual — Constitutional AI: Three Principles</span>
+  <div class="cap" style="grid-template-columns: repeat(3,1fr);">
+    <div class="cap-t" style="border-top: 3px solid var(--blue);">
+      <span class="ico">🛡️</span>
+      <h4>Helpful</h4>
+      <p>Designed to genuinely assist across complex tasks — not just answer simple queries.</p>
+    </div>
+    <div class="cap-t" style="border-top: 3px solid var(--green);">
+      <span class="ico">🔒</span>
+      <h4>Harmless</h4>
+      <p>Trained to avoid harmful, toxic, or discriminatory outputs, and to decline dangerous requests.</p>
+    </div>
+    <div class="cap-t" style="border-top: 3px solid var(--amber);">
+      <span class="ico">✅</span>
+      <h4>Honest</h4>
+      <p>Trained to acknowledge uncertainty and avoid fabricating information it doesn't have.</p>
+    </div>
+  </div>
+
+  <!-- Visual — Claude vs Chatbot -->
+  <span class="visual-lbl">Visual — Claude vs. Traditional Chatbot</span>
+  <div class="two">
+    <div class="card bt-blue">
+      <h4>Traditional Chatbot</h4>
+      <span class="col-tag">Scripted · Reactive · Limited</span>
+      <ul>
+        <li>Short, scripted answers</li>
+        <li>Fixed tone, no steering</li>
+        <li>FAQ and support use cases</li>
+        <li>Tiny context window</li>
+        <li>Single-turn only</li>
+      </ul>
+    </div>
+    <div class="card bt-green">
+      <h4>Claude</h4>
+      <span class="col-tag">Thoughtful · Steerable · Collaborative</span>
+      <ul>
+        <li>Context-aware reasoning</li>
+        <li>Directable tone and style</li>
+        <li>Writing, coding, research, strategy</li>
+        <li>200K+ token context (~500 pages)</li>
+        <li>Multi-turn dialogue</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Visual — Ways to Access -->
+  <span class="visual-lbl">Visual — Ways to Access Claude</span>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Interface</th><th>Best For</th><th>Plans</th></tr></thead>
+      <tbody>
+        <tr><td>Claude.ai (web, mobile, desktop)</td><td>Conversations, writing, research, analysis — the primary focus of this guide</td><td>Free, Pro, Max, Team, Enterprise</td></tr>
+        <tr><td>Claude Code (terminal)</td><td>Agentic coding: edit files, run commands, commit changes from the terminal</td><td>All plans</td></tr>
+        <tr><td>Claude &amp; Slack</td><td>Team communication: @Claude in threads, searches workspace channels</td><td>Team, Enterprise</td></tr>
+        <tr><td>Claude for Excel</td><td>Analyze, modify, and build spreadsheets in a sidebar</td><td>Paid plans</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Claude as a Thinking Partner</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A product manager preparing for a strategy meeting</h4>
+    <p>Instead of spending two hours pulling together competitive research, writing a brief, and formatting talking points, the PM opens Claude, describes the meeting context, uploads last quarter's product data, and asks Claude to draft an analysis and briefing doc. Claude asks clarifying questions, synthesizes the data, and produces a structured draft — which the PM refines in 20 minutes instead of two hours.</p>
+    <p style="margin-top:12px;">This is Claude as a thinking partner: not replacing the PM's judgment, but compressing the time required to exercise it.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · First Conversation with Claude</span>
+    </div>
+    <div class="pw-prompt">I'm a product manager at a B2B SaaS company.
+
+I want you to act as a knowledgeable thinking partner for my work.
+
+For our first conversation: what are the most important skills I should develop to use AI tools effectively in my daily workflow?
+
+Keep your answer practical and specific. Use bullet points organized by skill category.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Asks Claude to take on the role of a strategic advisor — not just a search engine — and produce practical, role-specific guidance about building AI fluency.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> "product manager at a B2B SaaS company" gives Claude the professional context needed to tailor its response</li>
+        <li><strong>Defining the task:</strong> "thinking partner" establishes a collaborative relationship, not a transactional one</li>
+        <li><strong>Specifying rules:</strong> "practical and specific, bullet points by category" controls the output format precisely</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Claude is guided by Constitutional AI: helpful, harmless, and honest</li>
+      <li>Claude reasons, writes, codes, researches — it is far more than an FAQ bot</li>
+      <li>Claude is steerable: you can direct its tone, style, focus, and output format</li>
+      <li>Access Claude via web, desktop, mobile, Slack, Excel — synced across all devices</li>
+    </ul>
+  </div>
+
+  <!-- Learning Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>What tasks in your current work could benefit most from having Claude as a thinking partner? Name two specific examples.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>How does Constitutional AI change your level of trust in Claude's responses compared to other AI tools you have used?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 2 — CAPABILITIES
+=================================================== -->
+<section id="ch2">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 02 · Claude Capabilities</span>
+    <h1 class="ch-title">Claude Capabilities</h1>
+    <p class="ch-intro">Claude is not a single-purpose tool. It operates effectively across five distinct capability areas — writing, research, coding, reasoning, and learning support — each with real-world professional applications. This chapter maps every major capability and gives you a ready-to-use prompt for each one.</p>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Five Capability Areas</h2>
+
+  <div class="cap">
+    <div class="cap-t">
+      <span class="ico">✍️</span>
+      <h4>Writing &amp; Content</h4>
+      <p>Emails, reports, social posts, decks. Claude takes direction on tone so your voice comes through cleanly.</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">🔬</span>
+      <h4>Research &amp; Analysis</h4>
+      <p>Explore complex documents. The 200K+ token window processes ~500 pages in a single session.</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">💻</span>
+      <h4>Coding</h4>
+      <p>Write, debug, and explain code across many languages. Claude Opus 4.5 leads on real-world software tasks.</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">🧠</span>
+      <h4>Reasoning</h4>
+      <p>Complex decisions, strategy, math. Extended thinking lets Claude reason step-by-step through hard problems.</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">📚</span>
+      <h4>Learning Support</h4>
+      <p>Claude adapts to your pace. Learning Mode guides your reasoning rather than just giving you answers.</p>
+    </div>
+  </div>
+
+  <!-- Visual Explanation -->
+  <span class="visual-lbl">Visual — Context Window Scale</span>
+  <div class="card blue">
+    <span class="c-lbl">Claude's Context Window</span>
+    <p style="font-size:1.1rem; margin-bottom:10px; color:var(--blue); font-weight:700;">200,000+ tokens ≈ 500 pages of text</p>
+    <p>You can upload an entire research paper, a lengthy contract, a full codebase, or a year of meeting notes — and Claude holds all of it in context while you work. This is what makes analysis of large documents possible in a single conversation.</p>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Capability in Practice</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A developer debugging a complex Python script</h4>
+    <p>A developer pastes 200 lines of a broken ETL pipeline into Claude, explains the error message they're seeing, and asks Claude to identify the root cause and propose a fix. Claude reads the entire script, explains the bug in plain language, rewrites the affected section with comments, and suggests two test cases to verify the fix. The developer ships the fix in 30 minutes instead of two hours of Stack Overflow searching.</p>
+  </div>
+
+  <!-- Prompts for each capability -->
+  <h2>Prompt Examples by Capability</h2>
+
+  <h3>Writing &amp; Content Creation</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · LinkedIn Announcement Post</span>
+    </div>
+    <div class="pw-prompt">I'm the marketing lead at a B2B software company.
+
+Write a LinkedIn post announcing our new feature: our product now integrates with Slack to automatically summarize long threads.
+
+Tone: professional but conversational, excited not salesy, written in first person.
+Length: 150–200 words.
+End with a question to encourage comments.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a publish-ready LinkedIn post tailored to a specific professional context and feature announcement.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> professional role and company type give Claude the brand context it needs</li>
+        <li><strong>Defining the task:</strong> specific feature detail avoids a generic, could-be-anyone announcement</li>
+        <li><strong>Specifying rules:</strong> tone, length, POV, and closing CTA are all fully defined</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Research &amp; Analysis</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Survey Analysis</span>
+    </div>
+    <div class="pw-prompt">I've uploaded our Q3 customer survey results (PDF).
+
+Analyze the document and:
+1. Identify the top 3 themes in customer complaints
+2. List the top 3 most-praised features
+3. Flag any surprising or unexpected findings
+4. Suggest two product improvements based on the data
+
+Present findings as an executive summary. Maximum 400 words.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Turns a raw survey PDF into a structured executive summary with specific, actionable findings.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> references the uploaded file so Claude uses it as its primary source</li>
+        <li><strong>Defining the task:</strong> numbered sub-tasks ensure nothing is missed</li>
+        <li><strong>Specifying rules:</strong> format and word limit are defined upfront</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Coding Assistance</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Python Script</span>
+    </div>
+    <div class="pw-prompt">I'm building a Python script to process CSV files.
+The file has columns: name, email, signup_date.
+
+Write a script that:
+1. Reads the CSV
+2. Filters rows where signup_date is in the last 30 days
+3. Exports filtered rows to "recent_signups.csv"
+
+Add explanatory comments to each section.
+List all libraries I need to install.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a complete, commented Python script with a dependency list — ready to run with minimal setup.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> exact column names prevent Claude from guessing the data structure</li>
+        <li><strong>Defining the task:</strong> three numbered steps ensure all requirements are addressed</li>
+        <li><strong>Specifying rules:</strong> comments and dependency list handle the full implementation context</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Problem-Solving &amp; Reasoning</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Strategic Decision</span>
+    </div>
+    <div class="pw-prompt">I'm a startup founder deciding whether to expand into Europe in Q1.
+
+Current situation:
+- 500 US enterprise customers
+- ARR: $2.4M
+- Team: 18 people, all US-based
+- No EU regulatory compliance yet
+
+Think through this decision step by step.
+Consider: financial requirements, hiring, GDPR compliance, and market timing.
+Show your reasoning at each step.
+Deliver a structured recommendation.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Activates extended reasoning to produce a structured, auditable strategic recommendation with visible logic at each step.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> concrete numbers give Claude real constraints to reason against</li>
+        <li><strong>Defining the task:</strong> "think step by step" activates Claude's extended reasoning mode</li>
+        <li><strong>Specifying rules:</strong> "show reasoning at each step" ensures the logic is visible and auditable</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Claude operates across five areas: writing, research, coding, reasoning, and learning support</li>
+      <li>The 200K+ token window can process approximately 500 pages in one session</li>
+      <li>Extended thinking enables step-by-step reasoning on complex decisions</li>
+      <li>Every capability improves when you give Claude specific context and a defined output format</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>Which capability area would save you the most time this week? Draft a prompt for that use case right now.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>What documents or files do you regularly work with that you could upload to give Claude richer context?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 3 — WRITING EFFECTIVE PROMPTS
+=================================================== -->
+<section id="ch3">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 03 · Writing Effective Prompts</span>
+    <h1 class="ch-title">Writing Effective Prompts</h1>
+    <p class="ch-intro">Every interaction with Claude starts with a prompt. A stronger prompt produces a stronger result — consistently, every time. This chapter teaches the three-part framework used by effective Claude users: Setting the Stage, Defining the Task, and Specifying Rules. Master this structure and you will get better outputs from your very first message.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Write effective prompts using the Stage → Task → Rules framework</li>
+      <li>Use file uploads to give Claude richer context</li>
+      <li>Iterate on Claude's responses with specific, targeted feedback</li>
+      <li>Troubleshoot the most common prompting mistakes</li>
+    </ul>
+  </div>
+
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — Getting started with Claude.ai
+    </div>
+    <iframe src="https://www.youtube.com/embed/0vZ_UVLhSQQ" allowfullscreen title="Getting started with Claude.ai"></iframe>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — The Three-Part Prompt Framework</h2>
+
+  <p>Think of Claude as a highly capable colleague who has joined your team today. They are brilliant — but they don't know your context, your audience, your tone preferences, or your deadlines. The more clearly you brief them, the better their work will be.</p>
+
+  <p>Before writing any prompt, think through three elements:</p>
+
+  <!-- Visual Explanation -->
+  <span class="visual-lbl">Visual — The Prompt Workflow Diagram</span>
+  <div class="pflow">
+    <span class="pflow-title">How a strong prompt flows to a strong response</span>
+    <div class="pflow-steps">
+      <div class="pstep highlight">1 · User Context (Setting the Stage)</div>
+      <div class="parrow">↓</div>
+      <div class="pstep highlight">2 · Task Definition (Defining the Task)</div>
+      <div class="parrow">↓</div>
+      <div class="pstep highlight">3 · Rules &amp; Output Format (Specifying Rules)</div>
+      <div class="parrow">↓</div>
+      <div class="pstep" style="background:var(--green-l); border-color:var(--green-m); color:var(--green); font-weight:700;">Claude Response</div>
+    </div>
+  </div>
+
+  <!-- Flow diagram with detail -->
+  <div class="flow">
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 01 — Stage</span>
+        <h4>Set the Context</h4>
+        <p>Who are you? What is your role? What background does Claude need to respond appropriately? Without context, Claude defaults to generic — which is rarely what you need.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 02 — Task</span>
+        <h4>Define the Action</h4>
+        <p>What exactly do you want Claude to do? Write, analyze, build, compare, summarize, debug? The more specific the task, the more useful the result.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 03 — Rules</span>
+        <h4>Specify the Output</h4>
+        <p>What tone? What length? What format — bullet points, a report, a table, under 200 words? Provide examples of ideal outputs where you have them.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Framework Applied to Market Research</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A marketing lead preparing an investor pitch</h4>
+    <p>Without the framework: "Tell me about the streaming market." Claude produces a generic Wikipedia-level overview.</p>
+    <p style="margin-top:10px;">With the framework: role established (marketing lead at an indie streaming startup preparing a pitch deck), task defined (research market trends, competitor positioning, growth opportunities), rules specified (current web research, citations, professional report structure). Claude produces a targeted, formatted, cited research brief that goes directly into the deck.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Market Research for Investor Pitch</span>
+    </div>
+    <div class="pw-prompt">I'm the marketing lead at an indie streaming startup preparing an investor pitch deck.
+
+Research the current state of the independent film streaming market.
+Identify: key trends, competitor positioning, and growth opportunities.
+
+Use current web research with citations.
+Structure the findings as a professional report with an executive summary at the top.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a targeted, cited market research report formatted for direct use in a pitch deck — not a generic overview.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> "marketing lead at an indie streaming startup preparing an investor pitch deck" — role and purpose in one sentence</li>
+        <li><strong>Defining the task:</strong> three specific research areas prevent Claude from wandering into irrelevant territory</li>
+        <li><strong>Specifying rules:</strong> web research with citations and professional report structure are stated explicitly</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Troubleshooting -->
+  <h2>Common Prompting Problems &amp; Fixes</h2>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Problem</th><th>Root Cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Response is too generic</td><td>Insufficient context</td><td>Add your role, audience, and specific constraints in Stage</td></tr>
+        <tr><td>Wrong length</td><td>Length not specified</td><td>State it directly: "two paragraphs" or "under 100 words"</td></tr>
+        <tr><td>Wrong format</td><td>Format not specified</td><td>Describe the structure or paste an example of what you want</td></tr>
+        <tr><td>Wrong tone</td><td>Claude defaults to professional</td><td>Describe tone plainly: "casual," "formal," "like talking to a friend"</td></tr>
+        <tr><td>Incorrect facts</td><td>Claude can hallucinate niche details</td><td>Ask Claude to cite sources; use web search for verification</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Every strong prompt has three parts: Stage (context), Task (action), Rules (format and style)</li>
+      <li>Speak to Claude like a knowledgeable new colleague — naturally, specifically, with full context</li>
+      <li>File uploads give Claude rich context without re-explaining documents each time</li>
+      <li>Iteration is the real skill: treat every first response as a draft, not a final deliverable</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>Write a Stage → Task → Rules prompt for a real task you need to complete this week.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>Which common prompting mistake have you made most often? What will you do differently from now on?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 4 — DESKTOP MODES
+=================================================== -->
+<section id="ch4">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 04 · Claude Desktop Modes</span>
+    <h1 class="ch-title">Claude Desktop Modes</h1>
+    <p class="ch-intro">The Claude desktop app offers three distinct modes — Chat, Cowork, and Code — each designed for a different type of work. Understanding which mode to use is the difference between a quick answer and a fully completed complex project.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Identify the three modes and what each is optimized for</li>
+      <li>Explain the unique capabilities of each mode</li>
+      <li>Match any task to the right mode immediately</li>
+    </ul>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Three Modes, Three Use Cases</h2>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Mode Comparison</span>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Mode</th><th>Optimized For</th><th>Key Additions</th></tr></thead>
+      <tbody>
+        <tr><td>💬 Chat</td><td>Quick exchanges, brainstorming, iterative drafting, back-and-forth dialogue</td><td>Quick entry overlay (Option key), screenshots, dictation, desktop connectors</td></tr>
+        <tr><td>🗂️ Cowork</td><td>Complex sustained work: research briefs, cross-source analysis, polished deliverables</td><td>Folder access, scheduled tasks, browser use, plugins, simultaneous subtasks</td></tr>
+        <tr><td>⌨️ Code</td><td>Software development: write, test, run, deploy, refactor code</td><td>Visual diffs, git integration, Ask / Code / Plan sub-modes, local + remote environments</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Chat Mode — Fast, Contextual, Always Accessible</h3>
+  <p>Chat is the same Claude experience you know from claude.ai, with native desktop additions that reduce friction while you're working in other apps:</p>
+  <ul>
+    <li><strong>Quick entry:</strong> Double-tap the Option key to pull Claude up as a floating overlay — without leaving your current app</li>
+    <li><strong>Screenshots and window sharing:</strong> Claude sees exactly what you're looking at — no manual description needed</li>
+    <li><strong>Dictation:</strong> Talk through a problem; Claude drafts from what you say</li>
+    <li><strong>Desktop connectors:</strong> Connect local tools and services so Claude can access apps on your machine</li>
+  </ul>
+
+  <div class="tip">
+    <span class="tip-i">💡</span>
+    <p><strong>Power move:</strong> Set up a morning routine prompt in Chat mode — paste it in as you make coffee and Claude drafts your daily priorities from your calendar and inbox while you're away.</p>
+  </div>
+
+  <h3>Cowork Mode — Complex, Multi-Source, Sustained Work</h3>
+  <p>Cowork is built for work that requires pulling from many sources, synthesizing, and producing something polished. Claude can run multiple subtasks in parallel — reading files, browsing the web, checking integrations — and bring the results together into one deliverable.</p>
+
+  <div class="tip">
+    <span class="tip-i">🔒</span>
+    <p><strong>Protected environment:</strong> Cowork runs in a contained environment on your computer. Claude reads, creates, and edits files only within the folders you explicitly share — nothing else is accessible.</p>
+  </div>
+
+  <h3>Code Mode — Full Development Environment</h3>
+  <p>Code mode is a complete development environment inside the desktop app, powered by Claude Code. Claude reads your codebase, writes and modifies code, runs commands, and tracks every change with git. You choose how much autonomy to give Claude:</p>
+  <ul>
+    <li><strong>Ask:</strong> Claude proposes every change and waits for your approval before modifying anything</li>
+    <li><strong>Code:</strong> Claude applies file changes automatically but checks in before running terminal commands</li>
+    <li><strong>Plan:</strong> Claude outlines its full approach before touching anything — review the plan, then execute</li>
+  </ul>
+
+  <!-- Example -->
+  <h2>Example — Choosing the Right Mode</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>Three tasks, three modes, same afternoon</h4>
+    <p><strong>2:00 PM — Quick question:</strong> A colleague sends a Slack message about a dashboard. The PM double-taps Option, shares the dashboard screenshot, and asks Claude in Chat mode what the key metric to focus on is. Answer in 30 seconds.</p>
+    <p style="margin-top:10px;"><strong>2:30 PM — Research brief:</strong> The PM opens Cowork mode, asks Claude to research the top five competitors and compile a brief from their websites, G2 reviews, and the company's own market research docs in Google Drive. Claude runs the searches in parallel and delivers the brief.</p>
+    <p style="margin-top:10px;"><strong>4:00 PM — Bug fix:</strong> The developer opens Code mode (Plan sub-mode), describes the bug, reviews Claude's plan, approves it, and watches the fix applied with a visual diff. Done before end of day.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Cowork Mode — Competitive Research Brief</span>
+    </div>
+    <div class="pw-prompt">I'm a VP of Product evaluating project management tools for our 80-person engineering org.
+
+Research the top 5 enterprise project management tools: Asana, Monday.com, ClickUp, Linear, Notion.
+
+For each tool, find:
+1. Enterprise pricing (current)
+2. Most-praised features (from G2 or Capterra reviews)
+3. Most common customer complaints
+4. Major product updates in the last 6 months
+
+Deliver a structured report with a summary comparison table at the top.
+Cite all sources.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a structured, cited competitive analysis across five tools from multiple sources — a task that would take 2–3 hours manually.</p>
+      <p class="pw-what" style="margin-top:10px;">Why Cowork mode:</p>
+      <ul>
+        <li>Requires visiting multiple websites and review platforms simultaneously</li>
+        <li>Cross-references and synthesizes findings into a single formatted report</li>
+        <li>Cowork's browser access and parallel subtasks handle all of this automatically</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Chat = fast exchanges, enhanced with Quick Entry overlay, screenshots, and dictation</li>
+      <li>Cowork = complex, multi-source deliverables with browser access and scheduled tasks</li>
+      <li>Code = full development environment with visual diffs, git, and three autonomy levels</li>
+      <li>Cowork and Code both run on Claude Code under the hood — same engine, different scope</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>List three tasks from your current workweek and identify which desktop mode best fits each one.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>What is one recurring task that Cowork's scheduled task feature could automate for you every morning?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 5 — PROJECTS
+=================================================== -->
+<section id="ch5">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 05 · Projects</span>
+    <h1 class="ch-title">Projects</h1>
+    <p class="ch-intro">Without Projects, every new Claude conversation starts from zero. You re-upload the brand guidelines. You re-explain the project background. You re-state your tone preferences. Projects eliminate this entirely — giving Claude persistent memory of your knowledge base, instructions, and conversation history across every chat in a work stream.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain what Projects are and when to use them</li>
+      <li>Create a Project with a knowledge base and instructions</li>
+      <li>Understand how RAG scaling handles large knowledge bases</li>
+      <li>Share Projects with teammates using the right permission level</li>
+    </ul>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — What Projects Give Claude</h2>
+
+  <div class="card blue">
+    <span class="c-lbl">Use Projects When You Have</span>
+    <ul>
+      <li><strong>Reference materials you re-use repeatedly</strong> — meeting notes, brand guidelines, survey results, technical documentation</li>
+      <li><strong>Consistent behavior requirements</strong> — always cite sources, always use formal tone, always follow our content template</li>
+      <li><strong>Team collaboration needs</strong> — multiple people working from the same shared foundation and knowledge base</li>
+    </ul>
+  </div>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Three Steps to Set Up a Project</span>
+
+  <div class="flow">
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 01</span>
+        <h4>Name and Configure</h4>
+        <p>claude.ai/projects → "+ New Project." Descriptive name (e.g., "Q4 Product Launch"). Set visibility: private or shared with your org.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 02</span>
+        <h4>Write Project Instructions</h4>
+        <p>These apply to every chat in this project: what you're working on, tone preferences, specific rules (e.g., "always end with a CTA"), and process requirements.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 03</span>
+        <h4>Build the Knowledge Base</h4>
+        <p>Upload PDFs, DOCXs, CSVs, TXT, HTML — or connect Google Drive. Use descriptive file names: "Q4-Brand-Guidelines.pdf" not "doc1.pdf" — Claude uses file names to retrieve the right information.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual — RAG -->
+  <span class="visual-lbl">Visual — How RAG Scaling Works</span>
+
+  <div class="arch">
+    <div class="arch-hub">Your Project Knowledge Base</div>
+    <div class="arch-nodes">
+      <div class="arch-n">Brand-Guidelines.pdf</div>
+      <div class="arch-n">Q4-Strategy.docx</div>
+      <div class="arch-n">Customer-Survey.csv</div>
+      <div class="arch-n">Competitor-Analysis.pdf</div>
+      <div class="arch-n">Product-Specs.pdf</div>
+      <div class="arch-n">Style-Guide.txt</div>
+    </div>
+    <p style="margin-top:14px; font-family:var(--fu); font-size:12px; color:var(--ink4);">RAG retrieves only the most relevant documents per question · Expands project capacity up to 10×</p>
+  </div>
+
+  <p>When your knowledge base grows large, Projects automatically switch to <strong>Retrieval Augmented Generation (RAG)</strong>. Instead of loading every document into memory simultaneously, Claude searches the knowledge base and retrieves only the most relevant content for each specific question. This expands usable project capacity by up to 10× while keeping responses accurate and focused.</p>
+
+  <!-- Example -->
+  <h2>Example — Projects in a Client Account Workflow</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A marketing agency managing multiple client accounts</h4>
+    <p>Without Projects: every Monday the copywriter re-uploads each client's brand guidelines and re-explains their tone before drafting the week's content.</p>
+    <p style="margin-top:10px;">With Projects: each client has a dedicated Project. Brand guidelines, past campaigns, and approved content examples live in the knowledge base. Project Instructions specify the exact tone, format, and rules for that client. On Monday morning, the copywriter opens the correct Project and asks Claude to draft the week's content — Claude already knows everything it needs.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Inside a Client Project</span>
+    </div>
+    <div class="pw-prompt">Based on the brand guidelines, past campaigns, and client communication history in this project:
+
+Write a 3-email nurture sequence for our upcoming product launch.
+
+Target audience: mid-market SaaS companies (50–200 employees).
+
+Each email should take a different angle:
+- Email 1: Pain point (lead with the problem)
+- Email 2: Social proof (customer story or data)
+- Email 3: Direct offer (clear CTA, limited time)
+
+Under 200 words per email.
+End each with a CTA button text suggestion.
+Match the brand tone described in the guidelines.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces three differentiated, on-brand emails using knowledge base context — without re-uploading anything or re-explaining the brand.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works inside a Project:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> references "this project" — Claude draws from the knowledge base automatically</li>
+        <li><strong>Defining the task:</strong> three specific email angles prevent any overlap or repetition</li>
+        <li><strong>Specifying rules:</strong> word limit, CTA requirement, and brand tone reference are all explicit</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Collaboration -->
+  <h2>Collaboration Permissions</h2>
+
+  <div class="perm">
+    <div class="pr hd">
+      <div class="pc">Level</div>
+      <div class="pc">What They Can Do</div>
+    </div>
+    <div class="pr">
+      <div class="pc"><strong>Can View</strong></div>
+      <div class="pc">See project contents, access knowledge base, have conversations — read-only, no edits</div>
+    </div>
+    <div class="pr">
+      <div class="pc"><strong>Can Edit</strong></div>
+      <div class="pc">Modify instructions, update knowledge base, manage members, contribute actively</div>
+    </div>
+    <div class="pr">
+      <div class="pc"><strong>Owner</strong></div>
+      <div class="pc">Full control: visibility settings, sharing with specific people or the whole organization</div>
+    </div>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Projects give Claude persistent memory across every conversation in a work stream</li>
+      <li>Project Instructions apply to every chat — write them once, benefit always</li>
+      <li>RAG mode automatically expands knowledge base capacity up to 10×</li>
+      <li>Team and Enterprise users can share projects with three distinct permission levels</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>What documents do you most frequently re-upload or re-explain to Claude? These belong in a Project knowledge base.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>Write three lines of Project Instructions for a work stream you are currently managing.</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 6 — SKILLS
+=================================================== -->
+<section id="ch6">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 06 · Skills</span>
+    <h1 class="ch-title">Skills</h1>
+    <p class="ch-intro">Skills are folders of instructions and scripts that Claude loads dynamically to perform specialized tasks in a consistent, repeatable way. If Projects are about what Claude knows, Skills are about how Claude works. The result is Claude that can reliably execute your workflows — not just respond to prompts.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain what Skills are and how Claude invokes them automatically</li>
+      <li>Use Anthropic's built-in Skills to create Excel, Word, PowerPoint, and PDF files</li>
+      <li>Create a Custom Skill for your own workflows without writing code</li>
+      <li>Understand when and how to enable Skills in settings</li>
+    </ul>
+  </div>
+
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — File execution with Skills
+    </div>
+    <iframe src="https://www.youtube.com/embed/LpGpwhORWr0" allowfullscreen title="File execution with Skills"></iframe>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Two Types of Skills</h2>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Skills Comparison</span>
+  <div class="two">
+    <div class="card bt-blue">
+      <h4>Anthropic Skills</h4>
+      <span class="col-tag">Built-in · Automatic · All paid plans</span>
+      <ul>
+        <li>Created and maintained by Anthropic</li>
+        <li>Excel, Word, PowerPoint, PDF creation</li>
+        <li>Invoked automatically when relevant</li>
+        <li>No setup required</li>
+      </ul>
+    </div>
+    <div class="card bt-purple">
+      <h4>Custom Skills</h4>
+      <span class="col-tag">Your workflows · Pro, Max, Team, Enterprise</span>
+      <ul>
+        <li>Created by you or your organization</li>
+        <li>Encode your brand rules and processes</li>
+        <li>Auto-invoked when relevant</li>
+        <li>Created through conversation — no coding</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Enabling Skills</h3>
+  <ol class="cl">
+    <li>Navigate to <strong>Settings → Capabilities</strong></li>
+    <li>Toggle on <strong>Code execution and file creation</strong> (required for Skills)</li>
+    <li>Scroll to the <strong>Skills section</strong> and toggle individual Skills on or off</li>
+  </ol>
+
+  <!-- Example -->
+  <h2>Example — Skills in Action</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>Turning 90 minutes of manual formatting into 3 minutes</h4>
+    <p>A data analyst used to spend 90 minutes every Friday formatting a weekly performance report in Excel — adding formulas, applying conditional formatting, building a chart, and writing a summary. With the Excel Skill enabled, they paste the raw numbers, describe the format they want, and Claude produces the formatted .xlsx file in under three minutes. The analyst reviews, adjusts two numbers, and sends it by 9:05 AM.</p>
+  </div>
+
+  <!-- Prompt Examples -->
+  <h2>Prompt Examples</h2>
+
+  <h3>Excel Skill</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Excel Spreadsheet</span>
+    </div>
+    <div class="pw-prompt">I manage monthly marketing expenses for our team.
+
+Create an Excel spreadsheet to track monthly expenses.
+
+Columns: Category, Vendor, Amount, Date, Campaign Name, Status (Approved / Pending).
+
+Add:
+- SUM formulas for each category in a summary row
+- Conditional formatting: red for amounts over $5,000, green for under $500
+- A second sheet with a pivot table summarizing totals by Category
+
+Deliver as a downloadable .xlsx file.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a fully formatted, formula-ready Excel workbook — downloadable as a .xlsx file. Can also be saved directly to Google Drive.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> "marketing expenses" gives Claude the domain context for sensible category suggestions</li>
+        <li><strong>Defining the task:</strong> exact column names, formulas, and sheets are specified</li>
+        <li><strong>Specifying rules:</strong> conditional formatting thresholds and output format (.xlsx) are explicit</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>PowerPoint Skill</h3>
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Executive Presentation</span>
+    </div>
+    <div class="pw-prompt">Convert these meeting notes into a 6-slide executive presentation.
+
+[paste meeting notes here]
+
+Slide structure:
+1. Executive Summary (3 bullets)
+2. Current Situation
+3. Key Findings (include a data table)
+4. Risks and Mitigation
+5. Recommended Actions
+6. Next Steps with owners and deadlines
+
+Clean, professional design.
+Maximum 5 bullet points per slide.
+Deliver as a .pptx file.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Transforms raw meeting notes into a structured, ready-to-edit executive presentation in .pptx format.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> raw notes are the source material — Claude knows exactly what to work from</li>
+        <li><strong>Defining the task:</strong> six numbered slides with specific content requirements per slide</li>
+        <li><strong>Specifying rules:</strong> density limit (5 bullets), design style, and output format (.pptx) are all explicit</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Creating a Custom Skill (No Coding Required)</h3>
+
+  <div class="flow">
+    <div class="fs">
+      <div class="fspine"><div class="fnode" style="border-color:var(--green)"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag" style="color:var(--green)">Step 01</span>
+        <h4>Tell Claude What to Build</h4>
+        <p>"Create a skill for writing weekly status reports" or "Build a skill that applies our brand guidelines to any new presentation."</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode" style="border-color:var(--green)"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag" style="color:var(--green)">Step 02</span>
+        <h4>Answer Claude's Interview Questions</h4>
+        <p>Claude asks: What should this skill do? What does a good output look like? Upload reference materials — templates, guidelines, examples of work you're proud of.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode" style="border-color:var(--green)"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag" style="color:var(--green)">Step 03</span>
+        <h4>Download the ZIP File</h4>
+        <p>Claude generates a properly structured skill and delivers it as a downloadable ZIP file.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode" style="border-color:var(--green)"></div></div>
+      <div class="fcrd">
+        <span class="ftag" style="color:var(--green)">Step 04</span>
+        <h4>Upload to Settings → Skills</h4>
+        <p>Your Custom Skill appears alongside Anthropic's built-in Skills. Claude invokes it automatically when relevant — no manual triggering needed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <span class="c-lbl">Security Note</span>
+    <p>Skills can include executable code. Only install Custom Skills from trusted sources. Anthropic's built-in Skills are tested and maintained by Anthropic. Your Custom Skills are private to your account or organization.</p>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Skills teach Claude how to execute a specific type of task consistently every time</li>
+      <li>Anthropic's built-in Skills cover Excel, Word, PowerPoint, and PDF — no setup required</li>
+      <li>Custom Skills encode your own workflows, brand rules, and multi-step processes</li>
+      <li>Creating a Custom Skill requires only a conversation with Claude — no coding needed</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>Which document type do you create most frequently where a built-in Skill would save you meaningful time each week?</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>Describe a multi-step repetitive process in your work that could become a Custom Skill. What would it need to do?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 7 — CONNECTORS
+=================================================== -->
+<section id="ch7">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 07 · Connectors</span>
+    <h1 class="ch-title">Connectors</h1>
+    <p class="ch-intro">Connectors transform Claude from a standalone assistant into a collaborator that works inside your actual tools. Instead of copying data between apps, Claude reads your information directly from the source — and can take action on your behalf within those tools.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain what Connectors are and how the MCP protocol powers them</li>
+      <li>Differentiate web connectors from desktop extensions</li>
+      <li>Set up a connector and write effective prompts that use it</li>
+      <li>Understand the security model — what Claude can and cannot access</li>
+    </ul>
+  </div>
+
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — Using Connectors with Claude
+    </div>
+    <iframe src="https://www.youtube.com/embed/_jjSS0qGFbI" allowfullscreen title="Using Connectors with Claude"></iframe>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — MCP and Two Connector Types</h2>
+
+  <p>All Connectors are powered by <strong>MCP — the Model Context Protocol</strong>. Think of MCP as USB-C for AI: a universal standard that lets Claude connect to any application through a single, consistent interface. Any developer can build a Connector for any tool, and it works with Claude immediately upon installation.</p>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Web Connectors vs. Desktop Extensions</span>
+  <div class="two">
+    <div class="card bt-blue">
+      <h4>Web Connectors</h4>
+      <span class="col-tag">Cloud services · Set up via browser</span>
+      <ul>
+        <li>Google Drive, Notion, Slack, Asana</li>
+        <li>Gmail, Linear, Stripe, Salesforce</li>
+        <li>Browse at claude.ai/directory</li>
+        <li>Desktop app not required</li>
+      </ul>
+    </div>
+    <div class="card bt-amber">
+      <h4>Desktop Extensions</h4>
+      <span class="col-tag">Local tools · Desktop app required</span>
+      <ul>
+        <li>Local file system access</li>
+        <li>Browser automation and control</li>
+        <li>Native app integrations (e.g., Figma)</li>
+        <li>Install via Settings → Extensions</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Connectors Eliminating Manual Work</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A manager's Monday morning — before and after Connectors</h4>
+    <p><strong>Before:</strong> Logs into Slack, scans channels for important messages, opens Google Calendar, checks meetings, opens Notion for project updates, copies relevant information into a notes doc, writes a priorities list. Time: 45 minutes.</p>
+    <p style="margin-top:10px;"><strong>After:</strong> Opens Claude. "Check my Slack for urgent messages since Friday, review today's calendar, and give me a 2-minute morning briefing in order of urgency." Claude reads both tools directly and produces the briefing. Time: 90 seconds.</p>
+  </div>
+
+  <!-- Prompt Examples -->
+  <h2>Prompt Examples</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Morning Briefing (Slack + Calendar Connected)</span>
+    </div>
+    <div class="pw-prompt">Good morning. I have a busy day ahead.
+
+Check my Slack for any urgent messages or mentions since yesterday at 6pm.
+Review my calendar for today and tomorrow.
+
+Compile a morning briefing with:
+- Urgent items requiring my attention (prioritized)
+- Today's meeting agenda with relevant prep notes
+- Any conflicts or upcoming deadlines I need to prepare for
+
+Format as a clean briefing I can scan in 2 minutes.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Pulls real-time information from two connected tools and synthesizes it into a prioritized, scannable daily briefing.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> "busy day ahead" primes Claude to prioritize urgency in its output</li>
+        <li><strong>Defining the task:</strong> two specific data sources (Slack, Calendar) and three output sections are explicit</li>
+        <li><strong>Specifying rules:</strong> "2-minute scan" sets the brevity requirement clearly</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Pre-Meeting Prep (Google Drive + Notion Connected)</span>
+    </div>
+    <div class="pw-prompt">I'm preparing for my quarterly business review next week.
+
+Search my Google Drive for any documents related to Q3 performance, OKRs, or team updates.
+Check our Notion workspace for the QBR template and previous QBR notes.
+
+Then:
+1. Draft a meeting agenda based on what you find
+2. Identify any gaps where I need to gather additional data before the meeting
+3. List three questions I should be prepared to answer
+
+Keep everything on one page.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Searches two connected tools simultaneously and synthesizes findings into a meeting-ready document — work that would take 30 minutes of manual searching done in seconds.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> upcoming QBR establishes the time-sensitive context</li>
+        <li><strong>Defining the task:</strong> three numbered deliverables ensure Claude doesn't stop at just finding the files</li>
+        <li><strong>Specifying rules:</strong> "one page" sets a firm density constraint</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — Connect Claude to Microsoft 365
+    </div>
+    <iframe src="https://www.youtube.com/embed/QTfoYDzqXn0" allowfullscreen title="Connect Claude to Microsoft 365"></iframe>
+  </div>
+
+  <h2>Security: What Claude Can and Cannot Access</h2>
+
+  <div class="card green">
+    <span class="c-lbl">Three Security Principles</span>
+    <ul>
+      <li><strong>Scoped access:</strong> Permissions are specific to what each connector needs. You control individual permissions per service.</li>
+      <li><strong>You see what Claude sees:</strong> Claude can only access data you already have permission to view. Connecting your email doesn't expose anyone else's inbox.</li>
+      <li><strong>Revocable anytime:</strong> Disconnect any service through Claude's settings or the third-party app's security settings.</li>
+    </ul>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Connectors give Claude direct access to your tools — eliminating manual copy/paste workflows</li>
+      <li>MCP is the universal protocol that makes any tool connectable to Claude</li>
+      <li>Web connectors link cloud apps; desktop extensions link local tools and the file system</li>
+      <li>Claude only accesses data you already have permission to view — and access is revocable anytime</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>Which three tools in your daily workflow would give Claude the most valuable access if connected?</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>What tasks currently require you to manually copy information between apps that a Connector could handle automatically?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 8 — ENTERPRISE SEARCH
+=================================================== -->
+<section id="ch8">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 08 · Enterprise Search</span>
+    <h1 class="ch-title">Enterprise Search</h1>
+    <p class="ch-intro">Enterprise Search adds a dedicated "Ask Your Org" panel to Claude's sidebar. It is purpose-built for finding and synthesizing knowledge scattered across your organization's connected tools — searching everything simultaneously and always citing its sources.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain Enterprise Search and how it differs from regular connectors</li>
+      <li>Identify the organizational questions it answers best</li>
+      <li>Understand the admin setup process and user authentication flow</li>
+    </ul>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Knowledge Discovery at Org Scale</h2>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Enterprise Search vs. Regular Connectors</span>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>Regular Connectors</th><th>Enterprise Search</th></tr></thead>
+      <tbody>
+        <tr><td>Primary purpose</td><td>Take actions, complete tasks</td><td>Find and synthesize organizational knowledge</td></tr>
+        <tr><td>Search scope</td><td>One tool at a time</td><td>All connected tools simultaneously</td></tr>
+        <tr><td>Design</td><td>General purpose</td><td>Optimized for knowledge discovery</td></tr>
+        <tr><td>Citations</td><td>Varies</td><td>Always cites every source</td></tr>
+        <tr><td>Available to</td><td>All plans</td><td>Team and Enterprise only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What Enterprise Search Answers Well</h2>
+
+  <div class="cap">
+    <div class="cap-t">
+      <span class="ico">📰</span>
+      <h4>Getting Up to Speed</h4>
+      <p>"What happened while I was out?" · "What are current blockers on Platform?"</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">📋</span>
+      <h4>Policy &amp; Process</h4>
+      <p>"What's our remote work policy?" · "How do I submit an expense report?"</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">🔎</span>
+      <h4>Research &amp; Analysis</h4>
+      <p>"Why do customers choose competitors?" · "Summarize Q4 roadmap discussions."</p>
+    </div>
+    <div class="cap-t">
+      <span class="ico">👋</span>
+      <h4>Onboarding</h4>
+      <p>"How does our auth system work?" · "What tools does engineering use for CI/CD?"</p>
+    </div>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Enterprise Search Before a Big Meeting</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A new sales director preparing for their first board presentation</h4>
+    <p>The new director needs to understand the company's revenue performance, open deals, competitive context, and what commitments leadership has made to the board in previous quarters. With Enterprise Search connected to Slack, email, Google Drive, and Salesforce, they ask a single question and get a cited briefing synthesized from all four sources in under two minutes — the kind of institutional knowledge it normally takes three weeks to absorb organically.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Pre-Meeting Organizational Brief</span>
+    </div>
+    <div class="pw-prompt">I'm preparing for a meeting with our enterprise sales team tomorrow.
+
+Search across all connected tools and provide:
+1. A summary of Q4 sales target discussions from the last 2 weeks
+2. Open questions or blockers mentioned in Slack or email
+3. Current status of our top 3 enterprise deals
+4. Any decisions from recent leadership meetings that affect the sales team
+
+Cite the source document or conversation for each point.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Synthesizes intelligence from Slack, email, CRM notes, and meeting documents into a cited pre-meeting briefing — work that would require 30–60 minutes of manual searching.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> meeting context tells Enterprise Search what topics and timeframes are relevant</li>
+        <li><strong>Defining the task:</strong> four numbered questions ensure comprehensive coverage across all connected sources</li>
+        <li><strong>Specifying rules:</strong> "cite the source for each point" ensures every claim is traceable and verifiable</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Setup -->
+  <h2>Setup: Admin and User Steps</h2>
+
+  <div class="two">
+    <div class="card bt-blue">
+      <h4>For Admins (Owners)</h4>
+      <span class="col-tag">One-time org-level setup</span>
+      <ul>
+        <li>Click "Ask Your Org" → "Set up for your org"</li>
+        <li>Connect Documents (Google Drive or SharePoint)</li>
+        <li>Connect Chat (Slack or Teams)</li>
+        <li>Add email connection (recommended)</li>
+        <li>Customize the project name for your org</li>
+      </ul>
+    </div>
+    <div class="card bt-green">
+      <h4>For Users</h4>
+      <span class="col-tag">Personal account authentication</span>
+      <ul>
+        <li>Click "Ask {Org Name}" in your sidebar</li>
+        <li>Follow guided onboarding steps</li>
+        <li>Authenticate with each service</li>
+        <li>More connectors = more comprehensive search results</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="tip-i">🔒</span>
+    <p><strong>Is it safe?</strong> Enterprise Search shows you only what you already have permission to access in the original tools. Your conversations stay private and your data is not indexed separately outside those tools.</p>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Enterprise Search is purpose-built for knowledge discovery — not task execution</li>
+      <li>It searches all connected tools simultaneously and always cites every source</li>
+      <li>Admins set it up once for the organization; each user authenticates their own accounts</li>
+      <li>Claude only shows data you already have permission to access</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>What questions do you regularly ask colleagues that could be answered by searching your organization's documents and conversations?</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>How would Enterprise Search change the onboarding experience for a new employee joining your team?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 9 — RESEARCH MODE
+=================================================== -->
+<section id="ch9">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 09 · Research Mode</span>
+    <h1 class="ch-title">Research Mode</h1>
+    <p class="ch-intro">Research Mode transforms Claude from a conversational assistant into a systematic investigator. Instead of a single web search, Claude plans a research strategy, runs many searches that build on each other, synthesizes findings from multiple sources, and delivers a comprehensive, cited report — automatically.</p>
+  </div>
+
+  <div class="objectives">
+    <span class="obj-lbl">After this chapter you will be able to</span>
+    <ul>
+      <li>Explain how Research Mode works and how it differs from a web search</li>
+      <li>Know when to use Research Mode vs. web search vs. extended thinking</li>
+      <li>Enable Research Mode and write prompts that get the best results</li>
+      <li>Combine Research Mode with connected integrations for deeper investigation</li>
+    </ul>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Research Mode vs. Other Approaches</h2>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — When to Use Each Tool</span>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Use This</th><th>When You Need</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Research Mode</strong></td><td>Comprehensive reports, competitive analysis, multi-source investigations with citations</td><td>5–45 min</td></tr>
+        <tr><td><strong>Web Search</strong></td><td>A quick specific fact — today's price, a company's address, a recent announcement</td><td>Seconds</td></tr>
+        <tr><td><strong>Extended Thinking</strong></td><td>Deep reasoning on a problem that requires no external data — math, logic, code debugging</td><td>1–5 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Visual — How Research Mode Works -->
+  <span class="visual-lbl">Visual — How Research Mode Works: Four Steps</span>
+
+  <div class="flow">
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 01 — Plan</span>
+        <h4>Claude Plans Its Research Strategy</h4>
+        <p>Extended thinking activates automatically. Claude breaks down your question, identifies what information is needed, and maps out how to investigate different angles — before running a single search.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 02 — Investigate</span>
+        <h4>Claude Conducts Multiple Searches</h4>
+        <p>Instead of one query, Claude runs many — each building on what it learned from the last. It pursues promising leads and fills in gaps it discovers along the way.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div><div class="fline"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 03 — Synthesize</span>
+        <h4>Claude Assembles a Structured Report</h4>
+        <p>After gathering from web sources and any connected integrations (Gmail, Google Drive, Calendar), Claude organizes all findings into a well-structured, readable report.</p>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="fspine"><div class="fnode"></div></div>
+      <div class="fcrd">
+        <span class="ftag">Step 04 — Cite</span>
+        <h4>Every Claim Links to Its Source</h4>
+        <p>Every finding is cited — so you can verify any claim, trace where it came from, and dig deeper on whatever matters most.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <span class="c-lbl">How Long Does Research Take?</span>
+    <p>Most reports complete in <strong>5–15 minutes</strong>. Complex multi-source investigations may take up to <strong>45 minutes</strong> — work that would normally require 2–4 hours of manual effort. Progress indicators show while Claude works in the background.</p>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — Research Mode Replacing a Half-Day of Work</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>A founder evaluating market entry into the EU</h4>
+    <p>The founder needs to understand the competitive landscape, regulatory requirements, customer expectations, and timing for expanding their US software product into the European market. Manually, this research would take 4–6 hours across 15+ sources. With Research Mode, they write a detailed prompt, enable the feature, and return to find a comprehensive, cited report with strategic recommendations — ready to share with the board — in 30 minutes.</p>
+  </div>
+
+  <!-- Prompt Examples -->
+  <h2>Prompt Examples</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Competitive Analysis (Research Mode)</span>
+    </div>
+    <div class="pw-prompt">Research Mode is enabled.
+
+I'm a VP of Product at a B2B SaaS company in the project management space.
+
+Conduct a comprehensive analysis of our top 5 competitors:
+Asana, Monday.com, ClickUp, Linear, and Notion.
+
+For each competitor, research:
+1. Current enterprise pricing
+2. Most-praised features (from G2 and Capterra reviews)
+3. Most common customer complaints
+4. Major product updates in the last 6 months
+5. Target customer positioning
+
+Deliver:
+- An executive summary (5 bullets max)
+- A comparison table across all 5 competitors
+- My top 3 strategic recommendations based on the findings
+
+Cite all sources.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Produces a structured competitive analysis with executive summary, comparison table, and strategic recommendations — all from verified, cited sources.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> role and competitive context tell Claude what perspective to take on the findings</li>
+        <li><strong>Defining the task:</strong> five specific research dimensions per competitor ensure comprehensive coverage</li>
+        <li><strong>Specifying rules:</strong> three distinct deliverables (summary, table, recommendations) with citation requirement</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Pre-Meeting Brief (Research Mode + Integrations)</span>
+    </div>
+    <div class="pw-prompt">Research Mode is enabled. Google Workspace is connected.
+
+I'm meeting with a potential enterprise client — TechCorp — next Tuesday.
+
+Please:
+1. Search my email and calendar for previous interactions with TechCorp or their team
+2. Research TechCorp online: company size, recent news, tech stack, known business challenges
+3. Synthesize everything into a 1-page pre-meeting brief including:
+   - Who they are and what they care about
+   - Our relationship history with them
+   - Three suggested talking points
+   - Two questions I should ask in the meeting</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Combines internal relationship history (email, calendar) with external company research to produce a complete pre-meeting brief — work that normally takes 1–2 hours of manual preparation.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> specific company name and meeting date create focused research scope</li>
+        <li><strong>Defining the task:</strong> three numbered research actions ensure both internal and external data are covered</li>
+        <li><strong>Specifying rules:</strong> 1-page limit, talking points, and questions to ask — a complete meeting toolkit</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Enable Research Mode</h2>
+  <ol class="cl">
+    <li>Ensure <strong>Web Search is enabled</strong> in Search and tools settings (required)</li>
+    <li>Find the <strong>Research button</strong> in the bottom left of your chat interface</li>
+    <li>Click to enable — it turns blue when active</li>
+    <li>Enter your detailed prompt and submit</li>
+    <li>Monitor progress indicators as Claude works through its research plan</li>
+  </ol>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>Research Mode is a systematic multi-search investigation — not a single query</li>
+      <li>Extended thinking activates automatically — Claude plans before it searches</li>
+      <li>Reports take 5–45 minutes and cite every claim — so you can verify anything</li>
+      <li>Connected integrations (Google Workspace, Slack) dramatically expand what Research Mode can find</li>
+    </ul>
+  </div>
+
+  <!-- Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Learning Checkpoint</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>What research project have you been putting off because it would take too long manually? Write a Research Mode prompt for it right now.</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>How would combining Research Mode with your Google Workspace or Slack connection change your client preparation process?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     CHAPTER 10 — PRACTICAL WORKFLOWS & PROMPT PLAYBOOK
+=================================================== -->
+<section id="ch10">
+<div class="w">
+
+  <div class="ch-hd">
+    <span class="ch-tag">Chapter 10 · Practical Workflows &amp; Prompt Playbook</span>
+    <h1 class="ch-title">Practical Claude Workflows &amp; Prompt Playbook</h1>
+    <p class="ch-intro">This final chapter is your practical reference. It brings together everything from the manual into one place: a workflow decision guide, a full cheat sheet, reusable prompt templates you can copy and adapt immediately, and a framework for becoming an AI power user over time.</p>
+  </div>
+
+  <!-- Core Concept -->
+  <h2>Core Concept — Matching Tool to Task</h2>
+
+  <!-- Visual -->
+  <span class="visual-lbl">Visual — Claude Workflow Decision Guide</span>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Situation</th><th>Best Tool</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Quick question while in another app</td><td>Chat · Quick Entry</td><td>Non-disruptive overlay, stays above your current work</td></tr>
+        <tr><td>Recurring work stream with shared context</td><td>Project + Chat</td><td>Persistent knowledge base — no re-explaining ever</td></tr>
+        <tr><td>Repeatable document or report creation</td><td>Skill</td><td>Encodes your methodology, runs automatically</td></tr>
+        <tr><td>Multi-source research project</td><td>Research Mode</td><td>Systematic, cited, hours of work in minutes</td></tr>
+        <tr><td>Query your own tools and data</td><td>Connectors + Chat</td><td>Claude reads your actual live data</td></tr>
+        <tr><td>Find organizational knowledge</td><td>Enterprise Search</td><td>Searches all connected tools at once, cites sources</td></tr>
+        <tr><td>Complex multi-source deliverable</td><td>Cowork (Desktop)</td><td>Parallel subtasks, browser, scheduled tasks</td></tr>
+        <tr><td>Write, debug, or refactor code</td><td>Code (Desktop)</td><td>Full dev environment, git, visual diffs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- Claude Workflow Cheat Sheet -->
+  <h2>Claude Workflow Cheat Sheet</h2>
+  <p>Quick reference for prompts across the most common professional use cases. Use these as starting points and adapt them with your context.</p>
+
+  <div class="cheat">
+    <div class="cheat-t">
+      <span class="cheat-lbl">🔬 Research</span>
+      <ul>
+        <li>"Research [topic] and give me the top 5 findings with citations"</li>
+        <li>"Compare [A] and [B] across [3 criteria] in a table"</li>
+        <li>"Summarize [document] in 5 bullets for an executive audience"</li>
+      </ul>
+    </div>
+    <div class="cheat-t">
+      <span class="cheat-lbl">✍️ Writing</span>
+      <ul>
+        <li>"Write a [type] for [audience] in [tone]. Length: [X words]"</li>
+        <li>"Rewrite this to be more [tone]. Keep the key facts."</li>
+        <li>"Turn these bullet points into a cohesive paragraph"</li>
+      </ul>
+    </div>
+    <div class="cheat-t">
+      <span class="cheat-lbl">💻 Coding</span>
+      <ul>
+        <li>"Write a [language] script that [task]. Add comments throughout."</li>
+        <li>"Debug this error: [paste error]. Explain the root cause."</li>
+        <li>"Refactor this function to be more readable and efficient"</li>
+      </ul>
+    </div>
+    <div class="cheat-t">
+      <span class="cheat-lbl">📊 Analysis</span>
+      <ul>
+        <li>"Analyze this data and identify the top 3 trends"</li>
+        <li>"Think step by step through [decision]. Show your reasoning."</li>
+        <li>"What are the risks of [approach]? Suggest mitigations."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- Prompt Templates -->
+  <h2>Prompt Templates</h2>
+  <p>Copy any template below. Replace all <span class="slot" style="display:inline;">amber text</span> with your own specifics.</p>
+
+  <h3>Template 1 — Research &amp; Analysis</h3>
+  <div class="tpl">
+    <div class="tpl-hd">Research Template · Copy &amp; Adapt</div>
+    <div class="tpl-body">I'm <span class="slot">[your role]</span> at <span class="slot">[company / context]</span>.
+
+I need to <span class="slot">[specific research task]</span> in order to <span class="slot">[purpose or goal]</span>.
+
+Focus on: <span class="slot">[2–4 specific angles or questions]</span>.
+
+Format: <span class="slot">[report / bullets / executive summary / comparison table]</span>.
+Include citations. Length: <span class="slot">[target length or depth]</span>.</div>
+  </div>
+
+  <h3>Template 2 — Writing &amp; Content</h3>
+  <div class="tpl">
+    <div class="tpl-hd">Writing Template · Copy &amp; Adapt</div>
+    <div class="tpl-body">I'm writing <span class="slot">[content type: email / post / report / proposal]</span> for <span class="slot">[audience]</span>.
+
+Goal: <span class="slot">[desired reader action or outcome]</span>.
+
+Tone: <span class="slot">[professional / conversational / formal / casual]</span>.
+Length: <span class="slot">[word count or paragraph count]</span>.
+Format: <span class="slot">[bullets / paragraphs / sections with headers]</span>.
+
+Key points to include:
+<span class="slot">[list the essential information to cover]</span></div>
+  </div>
+
+  <h3>Template 3 — Problem Solving &amp; Decisions</h3>
+  <div class="tpl">
+    <div class="tpl-hd">Problem Solving Template · Copy &amp; Adapt</div>
+    <div class="tpl-body">Context: <span class="slot">[describe the situation in 2–3 sentences]</span>
+
+Current state: <span class="slot">[relevant data, constraints, or facts]</span>
+
+I need help with: <span class="slot">[specific decision, analysis, or recommendation]</span>
+
+Think through this step by step.
+Consider: <span class="slot">[the factors or angles you want evaluated]</span>
+
+Deliver: <span class="slot">[recommendation / pros-cons analysis / structured decision framework]</span></div>
+  </div>
+
+  <h3>Template 4 — Data Analysis</h3>
+  <div class="tpl">
+    <div class="tpl-hd">Data Analysis Template · Copy &amp; Adapt</div>
+    <div class="tpl-body">I've attached <span class="slot">[description of the dataset or document]</span>.
+
+Analyze this data and:
+1. <span class="slot">[First task — e.g., "identify the top 3 trends"]</span>
+2. <span class="slot">[Second task — e.g., "flag any outliers or anomalies"]</span>
+3. <span class="slot">[Third task — e.g., "suggest two action items based on findings"]</span>
+
+Present as: <span class="slot">[executive summary / bullets / comparison table]</span>.
+Audience: <span class="slot">[who will read this — leadership / team / client]</span>.</div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- Becoming a Power User -->
+  <h2>Becoming an AI Power User</h2>
+
+  <h3>Iterate, Don't Restart</h3>
+  <p>The most common mistake is treating Claude's first response as a finished product. It is a starting draft. Review it, identify what is working and what is not, then give specific feedback: "Cut the first two paragraphs and make the recommendation section more actionable" is better than "make it better."</p>
+
+  <h3>Evaluate Claude for Your Specific Workflows</h3>
+  <p>Your work is unique. Running simple evaluations helps you understand where Claude adds the most value and where you need to provide more specific guidance:</p>
+  <ol class="cl">
+    <li><strong>Gather examples</strong> — collect 5–10 samples of a task you do regularly (emails, reports, analyses)</li>
+    <li><strong>Create test prompts</strong> — write prompts using the Stage → Task → Rules framework for each sample</li>
+    <li><strong>Compare outputs</strong> — does Claude capture the key information? Is the tone right? What is missing?</li>
+    <li><strong>Refine your approach</strong> — adjust prompts, add examples to the Stage section, identify where human review is essential</li>
+  </ol>
+
+  <h3>Build Your Prompt Library</h3>
+  <p>Every time you find a prompt that produces consistently excellent results, save it. Over time you will build a personal prompt library tuned to your role, voice, and recurring workflows. This library compounds in value the longer you maintain it — and it becomes one of the most transferable assets of your AI fluency.</p>
+
+  <div class="vid">
+    <div class="vid-bar">
+      <span class="vd r"></span><span class="vd y"></span><span class="vd g"></span>
+      &nbsp;Video — Using Claude for data analysis
+    </div>
+    <iframe src="https://www.youtube.com/embed/Zzn-g8lvLMA" allowfullscreen title="Using Claude for data analysis"></iframe>
+  </div>
+
+  <!-- Example -->
+  <h2>Example — The Power User Difference</h2>
+
+  <div class="example-block">
+    <span class="eg-lbl">Real-World Scenario</span>
+    <h4>Two product managers. Same tool. Different results.</h4>
+    <p><strong>PM A</strong> types "write a PRD for a new feature" and gets a generic template. They are frustrated because it doesn't match their company's format.</p>
+    <p style="margin-top:10px;"><strong>PM B</strong> opens their Projects folder where the company PRD template, last quarter's approved PRDs, and the product strategy doc already live. They type "Write a PRD for [feature] using the format in our PRD template. Align it with the strategic priorities in the Q4 strategy doc." They get a first draft that requires 20 minutes of editing, not 3 hours of writing from scratch.</p>
+    <p style="margin-top:10px;">The difference is not the tool. It is the setup, the context, and the specificity of the prompt.</p>
+  </div>
+
+  <!-- Prompt Example -->
+  <h2>Prompt Example</h2>
+
+  <div class="prompt-wrap">
+    <div class="pw-head">
+      <div class="pw-dots"><span class="pw-dot r"></span><span class="pw-dot y"></span><span class="pw-dot g"></span></div>
+      <span class="pw-lbl">Prompt · Iterating on a Draft</span>
+    </div>
+    <div class="pw-prompt">This draft is good but needs adjustment.
+
+The tone is too formal for our audience (early-stage startup founders, not enterprise buyers).
+
+Please:
+1. Rewrite the opening paragraph to feel more direct and peer-to-peer
+2. Cut the second section by 40% — keep only the most critical points
+3. Make the call-to-action in the closing more specific: tell the reader exactly what to do next and why it matters now
+
+Keep the data points and structure intact.</div>
+    <div class="pw-exp">
+      <p class="pw-what">What this prompt does:</p>
+      <p>Transforms a good-but-not-quite-right draft into a polished, audience-specific final version through targeted, specific iteration.</p>
+      <p class="pw-what" style="margin-top:10px;">Why this prompt works:</p>
+      <ul>
+        <li><strong>Setting the stage:</strong> identifies the specific gap (tone mismatch for the audience) so Claude understands the "why" behind the changes</li>
+        <li><strong>Defining the task:</strong> three numbered actions with exact requirements — no ambiguity about what needs to change</li>
+        <li><strong>Specifying rules:</strong> "keep the data points and structure intact" sets a clear constraint so Claude doesn't throw away the good parts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 10 Habits -->
+  <div class="card blue">
+    <span class="c-lbl">10 Habits of Effective Claude Users</span>
+    <ul>
+      <li>Always include your role and context — Claude performs better when it understands who you are</li>
+      <li>Be explicit about format and length — do not make Claude guess</li>
+      <li>Treat every first response as a draft — iterate with specific, targeted feedback</li>
+      <li>Use Projects for any work stream with recurring reference materials</li>
+      <li>Create Custom Skills for multi-step processes you run more than once a week</li>
+      <li>Connect your key tools — time saved on copy/paste compounds quickly</li>
+      <li>Use Research Mode for anything that would normally take hours of manual research</li>
+      <li>Name uploaded files descriptively — Claude uses file names to retrieve the right information</li>
+      <li>Verify high-stakes facts independently — Claude occasionally generates plausible but incorrect details</li>
+      <li>Run simple evaluations on recurring tasks — compare outputs to your best examples and refine continuously</li>
+    </ul>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- Ecosystem diagram -->
+  <h2>The Claude Ecosystem</h2>
+
+  <div class="arch">
+    <div class="arch-hub">Your Work</div>
+    <div class="arch-nodes">
+      <div class="arch-n">💬 Chat</div>
+      <div class="arch-n">📁 Projects</div>
+      <div class="arch-n">⚙️ Skills</div>
+      <div class="arch-n">🔌 Connectors</div>
+      <div class="arch-n">🏢 Enterprise Search</div>
+      <div class="arch-n">🔍 Research Mode</div>
+      <div class="arch-n">🗂️ Cowork</div>
+      <div class="arch-n">⌨️ Code</div>
+    </div>
+    <p style="margin-top:14px; font-family:var(--fu); font-size:12px; color:var(--ink4);">All features available at claude.ai · Free · Pro · Max · Team · Enterprise</p>
+  </div>
+
+  <div class="card blue" style="margin-top:28px;">
+    <span class="c-lbl">Where to Go Next</span>
+    <ul>
+      <li><strong>claude.ai</strong> — Start using Claude today (Free, Pro, Max, Team, Enterprise)</li>
+      <li><strong>claude.ai/directory</strong> — Browse all available Connectors</li>
+      <li><strong>claude.ai/projects</strong> — Create your first Project</li>
+      <li><strong>Anthropic's Free AI Fluency Course</strong> — Deep dive on the 4D Framework (Delegation, Description, Discernment, Diligence)</li>
+      <li><strong>Use-Case Gallery at claude.com</strong> — Inspiration organized by job function and industry</li>
+    </ul>
+  </div>
+
+  <!-- Key Takeaways -->
+  <div class="takeaways">
+    <div class="tk-hd"><div class="tk-ico">★</div><span class="tk-lbl">Key Takeaways</span></div>
+    <ul>
+      <li>The right Claude tool depends on the task — match them using the decision guide</li>
+      <li>Templates + iteration produce far better results than starting from scratch each time</li>
+      <li>Building a prompt library is one of the highest-leverage investments you can make in AI fluency</li>
+      <li>Power users evaluate continuously — they treat every output as a signal to improve their prompts</li>
+    </ul>
+  </div>
+
+  <!-- Final Checkpoint -->
+  <div class="checkpoint">
+    <span class="ck-lbl">Final Reflection</span>
+    <div class="ckq"><span class="ckn">Q1</span><span>Looking at your current work, which combination of Claude features would create the most impact for you in the next 30 days?</span></div>
+    <div class="ckq"><span class="ckn">Q2</span><span>What is one concrete action you will take in the next 48 hours to apply what you have learned in this manual?</span></div>
+  </div>
+
+</div>
+</section>
+
+<!-- ===================================================
+     FOOTER
+=================================================== -->
+<footer>
+  <div class="ft-title">Your First Claude AI Manual</div>
+  <p>Prompt Engineering and AI Workflows Explained Simply</p>
+  <p style="margin-top:8px;">Based on Anthropic's official Claude 101 learning material.</p>
+  <p>All product details reflect capabilities documented in official Anthropic course materials.</p>
+
+  <div class="ft-author">
+    <p><strong style="color:var(--ink2); font-family:var(--fu);">Author: Deepak Singh</strong></p>
+    <p>Product Manager · Steering Committee Member, South Asian Success</p>
+    <p style="margin-top:6px;">
+      <a href="https://www.linkedin.com/in/deepak-bhandari-4a2095153/" target="_blank" rel="noopener">
+        linkedin.com/in/deepak-bhandari-4a2095153
+      </a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
